@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Food Delivery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <div class="brand">
+    &#127828; Hungry Point
+  </div>
+  <div class="nav-links">
+    <a href="index.html" class="active">Menu</a>
+    <a href="login.html">Login</a>
+    <a href="signup.html">Signup</a>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <h1>Hungry? We've got you covered.</h1>
+    <p>Discover mouth-watering delicacies from top chefs. Browse our premium menu, explore flavors, and order your next great meal.</p>
+  </div>
+
+  <h2 class="section-title">
+    &#128293; Featured Dishes
+  </h2>
+
+  <div class="grid" id="menu-grid">
+    <!-- JS will populate these for easier data management -->
+  </div>
+</div>
+
+<button class="cart-toggle-btn" id="cart-toggle">
+  &#128722;
+  <span class="cart-badge" id="cart-badge">0</span>
+</button>
+
+<div class="cart-sidebar" id="cart-sidebar">
+  <div class="cart-header">
+    <h2>Your Order</h2>
+    <button class="close-cart" id="close-cart">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="empty-cart">Your cart is empty.</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cart-total-price">Rs. 0</span>
+    </div>
+    <button class="checkout-btn" id="checkout-btn">Place Order</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Item added to cart!</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

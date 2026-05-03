@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkout - Enter Address</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  color: #f3f4f6;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(34, 197, 94, 0.08), transparent 70%);
+  top: -180px; left: -150px;
+  border-radius: 50%;
+}
+body::after {
+  content: '';
+  position: fixed;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.06), transparent 70%);
+  bottom: -120px; right: -100px;
+  border-radius: 50%;
+}
+
+.card {
+  width: 100%;
+  max-width: 520px;
+  background: #18181b;
+  border-radius: 22px;
+  padding: 38px 34px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+  width: 54px; height: 54px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.25);
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+  color: #fff;
+}
+
+.subtitle {
+  color: #a1a1aa;
+  font-size: 14px;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a1a1aa;
+}
+
+.input-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-wrap .icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #71717a;
+  pointer-events: none;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px 14px 13px 42px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: #09090b;
+  color: #f3f4f6;
+  resize: none;
+}
+
+textarea {
+  padding: 13px 14px 13px 14px;
+  min-height: 100px;
+}
+
+input::placeholder, textarea::placeholder { color: #52525b; }
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1), 0 0 20px rgba(34, 197, 94, 0.05);
+  background: #111;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.25);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.3);
+}
+
+.btn:active { transform: translateY(0); }
+
+/* ---- Toast Notification ---- */
+.toast {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10b981;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+  transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 300;
+  font-size: 16px;
+}
+.toast.show { bottom: 40px; }
+</style>
+</head>
+<body>
+
+<div class="card" id="checkout-card">
+  <div class="logo">&#128757;</div>
+  <h1>Delivery Details</h1>
+  <p class="subtitle">Where should we deliver your food?</p>
+
+  <form id="checkout-form">
+    <label for="address">Full Address</label>
+    <div class="input-wrap">
+      <textarea id="address" placeholder="123 Main St, Apartment 4B" required></textarea>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+      <div>
+        <label for="city">City</label>
+        <div class="input-wrap">
+          <span class="icon">&#127980;</span>
+          <input id="city" type="text" placeholder="Your City" required>
+        </div>
+      </div>
+      <div>
+        <label for="zip">Zip Code</label>
+        <div class="input-wrap">
+          <span class="icon">&#128236;</span>
+          <input id="zip" type="text" placeholder="10001" required>
+        </div>
+      </div>
+    </div>
+
+    <label for="phone">Phone Number</label>
+    <div class="input-wrap">
+      <span class="icon">&#128222;</span>
+      <input id="phone" type="text" placeholder="+1 234 567 890" required>
+    </div>
+
+    <button type="submit" class="btn">Confirm Order</button>
+  </form>
+</div>
+
+<div class="toast" id="toast">Thanks for ordering!</div>
+
+<script>
+  document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent form submission
+    
+    // Disable form
+    const btn = document.querySelector('.btn');
+    btn.textContent = 'Processing...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    // Gather data
+    const address = document.getElementById('address').value;
+    const city = document.getElementById('city').value;
+    const zip = document.getElementById('zip').value;
+    const phone = document.getElementById('phone').value;
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const user_name = localStorage.getItem('user') || 'Guest';
+
+    const orderData = {
+      user_name: user_name,
+      address: address,
+      city: city,
+      zip_code: zip,
+      phone: phone,
+      cart: cart
+    };
+
+    fetch('/api/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.status === 'success') {
+        // Clear cart
+        localStorage.removeItem('cart');
+
+        // Show success message
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        
+        // Redirect back to home after 2.5 seconds
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 2500);
+      } else {
+        alert("Error placing order: " + data.message);
+        btn.textContent = 'Confirm Order';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert("Error placing order.");
+      btn.textContent = 'Confirm Order';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    });
+  });
+</script>
+
+</body>
+</html>

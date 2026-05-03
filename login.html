@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login Page</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  color: #f3f4f6;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* decorative bg glows */
+body::before {
+  content: '';
+  position: fixed;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.08), transparent 70%);
+  top: -200px; right: -150px;
+  border-radius: 50%;
+}
+body::after {
+  content: '';
+  position: fixed;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.07), transparent 70%);
+  bottom: -150px; left: -120px;
+  border-radius: 50%;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: #18181b;
+  border-radius: 22px;
+  padding: 38px 34px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.05);
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.logo {
+  width: 54px; height: 54px;
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.25);
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+  color: #fff;
+}
+
+.subtitle {
+  color: #a1a1aa;
+  font-size: 14px;
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #a1a1aa;
+}
+
+.input-wrap {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-wrap .icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #71717a;
+  pointer-events: none;
+}
+
+input {
+  width: 100%;
+  padding: 13px 14px 13px 42px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: #09090b;
+  color: #f3f4f6;
+}
+
+input::placeholder { color: #52525b; }
+
+input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1), 0 0 20px rgba(249, 115, 22, 0.05);
+  background: #111;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #ea580c, #c2410c);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(249, 115, 22, 0.3);
+}
+
+.btn:active { transform: translateY(0); }
+
+.error {
+  background: rgba(239,68,68,0.08);
+  color: #f87171;
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 22px 0 18px;
+  color: #71717a;
+  font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+}
+
+.divider::before { margin-right: 12px; }
+.divider::after  { margin-left: 12px; }
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  font-size: 13px;
+}
+
+.links a {
+  color: #f97316;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.links a:hover {
+  color: #fb923c;
+  text-decoration: underline;
+}
+</style>
+</head>
+<body>
+	<div class="card">
+		<div class="logo">&#127828;</div>
+		<h1>Welcome back</h1>
+		<p class="subtitle">Sign in to continue to Hungry Point.</p>
+
+		<form method="get" action="#">
+			<label for="username">Email</label>
+			<div class="input-wrap">
+				<span class="icon">&#9993;</span>
+				<input id="username" type="text" name="username" placeholder="you@example.com" required>
+			</div>
+
+			<label for="password">Password</label>
+			<div class="input-wrap">
+				<span class="icon">&#128274;</span>
+				<input id="password" type="password" name="password" placeholder="Enter your password" required>
+			</div>
+
+			<button class="btn" type="button" onclick="handleLogin()">Sign In</button>
+		</form>
+
+		<script>
+			function handleLogin() {
+				const email = document.getElementById('username').value;
+				if (email) {
+					const name = email.split('@')[0];
+					localStorage.setItem('user', name);
+					window.location.href = 'index.html';
+				} else {
+					alert("Please enter an email");
+				}
+			}
+		</script>
+
+		<div class="divider">or</div>
+
+		<div class="links">
+			<a href="signup.html">Create account</a>
+			<a href="index.html">Browse menu</a>
+		</div>
+	</div>
+
+</body>
+</html>
